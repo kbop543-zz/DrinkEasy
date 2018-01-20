@@ -1,6 +1,21 @@
 var User = require('../models/user');
 var bcrypt = require('bcrypt');
 
+//use for pages that require login
+var requirelogin = function requirelogin(req, res, next){
+    if(!req.user){
+      res.render('home', {
+        Message: 'Please log in',
+        partials: {
+            content: 'login'
+        }
+   });
+    }
+    else{
+      next();
+    }
+}
+
 module.exports = function(app){
     
 //middleware function for sessions
@@ -59,7 +74,7 @@ app.post('/login', function(req, res){
       }
       else{
         if(bcrypt.compareSync(req.body.password, user.password)){
-          //req.session.user = user;
+          req.session.user = user;
           res.render('menu');
           console.log(user);
         }
@@ -70,9 +85,9 @@ app.post('/login', function(req, res){
       });
 });
 
-
 app.get('/logout', function(req, res){
     req.session.reset();
     res.redirect('/');
   });
+
 };
