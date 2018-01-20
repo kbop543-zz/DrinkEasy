@@ -52,6 +52,10 @@ body {
     cursor: hand;
 }
 
+.error{
+    color: red;
+}
+
 .login-field {
     margin: 8px;
     padding: 10px;
