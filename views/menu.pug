@@ -30,7 +30,7 @@ div(class="content")
                     input(type="submit" value="Upload")
                     input(type="reset" value="Reset")
                     br
-
+                    
 
                     p(id='instruction') Do you want users to be able to keep tabs?
 
@@ -41,13 +41,14 @@ div(class="content")
                     
                     div(class='section')
                         form(id='updateInfo' name='info')
-                            input(id='email' class='user-info' type='email' placeholder='Email' name='email' disabled, required, pattern='[A-Za-z0-9_]{3,20}' title='Needs to be 3-20 characters and Alphanumeric')
+                           
+                            input(id='email' class='user-info' type='email' placeholder='Email' name='email' value=email disabled, required, pattern='[A-Za-z0-9_]{3,20}' title='Needs to be 3-20 characters and Alphanumeric')
 
-                            input(id='password' class='user-info' type='password' placeholder='Password' name='password',pattern='[A-Za-z0-9_]{3,20}',title='Needs to be 3-20 characters and Alphanumeric')
+                            input(id='password' class='user-info' type='password' placeholder='Password' value=password name='password',pattern='[A-Za-z0-9_]{3,20}',title='Needs to be 3-20 characters and Alphanumeric')
 
-                            input(id='nameOfBar' class='user-info' type='text' placeholder='Name of Bar' name='nameOfBar', required, pattern='^[A-z]+$' title='Alphabetic letters only')
+                            input(id='nameOfBar' class='user-info' type='text' placeholder='Name of Bar' value=barname name='nameOfBar', required, pattern='^[A-z]+$' title='Alphabetic letters only')
 
-                            input(id='Address' class='user-info' type='text' placeholder='Address' name='Address', required, pattern='^[A-z]+$' title='Alphabetic letters only')
+                            input(id='Address' class='user-info' type='text' placeholder='Address' value=address name='Address', required, pattern='^[A-z]+$' title='Alphabetic letters only')
 
                             input(id='updateUserButton' class='user-info-button' type='submit' value='Save Changes')
 

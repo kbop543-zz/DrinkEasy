@@ -1,6 +1,5 @@
 var User = require('../models/user');
 var bcrypt = require('bcrypt');
-var multer  =   require('multer');
 
 //use for pages that require login
 var requirelogin = function requirelogin(req, res, next){
