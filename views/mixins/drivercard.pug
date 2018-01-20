@@ -1,0 +1,14 @@
+mixin drivercard(d)
+    div(class='card')
+        div(class='card-container')
+            p(class='card-title') #{d.username}
+            div('card-content')
+                br
+                p(class='card-firstName') First Name: #{d.firstName} 
+                p(class='card-lastName') Last Name: #{d.lastName}
+                br
+                p(class='card-email') Email: #{d.email}
+                p(class='card-carModel') Car Model: #{d.carModel}
+                br
+                button(class='hostedHikes' style='width: 250px; margin: 0px;' id=d.username) See all hosted hikes for this driver
+                div(id='rides-' + d.username)

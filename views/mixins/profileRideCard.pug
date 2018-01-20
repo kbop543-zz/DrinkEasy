@@ -1,0 +1,9 @@
+mixin profileRideCard(h)
+    div(class="card")
+        p(class="card-title") #{h.origin} → #{h.destination}
+        div("card-content")
+            p(class="card-capacity") #{h.size}/#{h.capacity} spots taken
+            p(class="card-driver") Driven by #{h.driver}
+            p(class="card-leaving") Leaving #{h.departureDate}
+            p(class="card-arriving") Arriving #{h.arrivalDate}
+            p(class="card-price") Price: $ #{h.price}

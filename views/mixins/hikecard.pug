@@ -1,0 +1,22 @@
+mixin hikecard(h, username, admin)
+    div(class='card')
+        div(style='display: flex;')
+            p(class='card-title') #{h.origin} → #{h.destination}
+            p(class='card-capacity') #{h.size}/#{h.capacity} Seats Taken
+        div(style='display: flex;')
+            div(id='circle' style='margin-top: 8px;')
+            p(class='card-leaving') Leaving #{h.departureDate}
+        div(id='rectangle')
+        div(style='display: flex;')
+            div(id='circle' style='margin-bottom: 3px;')
+            p(class='card-arriving') Arriving #{h.arrivalDate}
+        p(class='card-driver') Driven by #{h.driver}
+        div(class='card-footer')
+            p(class='card-price' style='padding: 3px;') Price: $#{h.price}
+            - if (!admin && h.driver != username && h.riders.indexOf(username) < 0) {
+            input(type='button' id='' + h.driver + ',' + h.departureDate class='join-button' value='Join')
+            - }
+
+            - if (!admin && h.driver != username && h.riders.indexOf(username) > -1) {
+            input(type='button' id='' + h.driver + ',' + h.departureDate class='join-button' value='Cancel Ride')
+            - }

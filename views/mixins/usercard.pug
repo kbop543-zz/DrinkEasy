@@ -1,0 +1,22 @@
+mixin usercard(u)
+    div(class='userCard')
+        div(class='card-container')
+            p(class='card-title') 
+                
+                div('card-content')
+                    form(class='edit-user' id='editUser-' + u.username name='editUser')
+                        input(class='editUser-field' type='text' placeholder='Username' name='username' readOnly="true",required,pattern='[A-Za-z0-9_]{3,20}' title='Needs to be 3-20 characters and Alphanumeric' value=u.username )
+                        br
+                        input(class='editUser-field' type='password' placeholder='Password' name='password' , required, pattern='[A-Za-z0-9_]{3,20}' title='Needs to be 3-20 characters and Alphanumeric' value=u.password)
+                        br
+                        input(class='editUser-field' type='text' placeholder='First Name' name='firstName',required,pattern='^[A-z]+$' title='Alphabetic letters only' value=u.firstName)
+                        br
+                        input(class='editUser-field' type='text' placeholder='Last Name' name='lastName',required pattern='^[A-z]+$' title='Alphabetic letters only' value=u.lastName)
+                        br
+                        input(class='editUser-field' type='email' placeholder='Email' name='email',required value=u.email)
+                        br 
+                        input(id='licensePlate' class='editUser-field' type='text' placeholder='License Plate' name='licensePlate',pattern='[A-Za-z0-9_]{3,20}',title='Needs to be 3-20 characters and Alphanumeric' value=u.licensePlate )
+                        br
+                        input(id='carModel' class='editUser-field' type='text' placeholder='Car Model' name='carModel' ,pattern='[A-Za-z0-9_]{3,20}',title='Needs to be 3-20 characters and Alphanumeric' value=u.carModel )
+                        br
+                        button(id="" class='edit-button' type='submit') Edit User

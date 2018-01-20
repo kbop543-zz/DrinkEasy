@@ -1,0 +1,22 @@
+mixin ridecard(h)
+    div(class='card')
+        div(class='card-container')
+            div(style='display: flex;')
+                p(class='card-title') #{h.origin} → #{h.destination}
+                p(class='card-capacity') #{h.size}/#{h.capacity} spots taken
+            div('card-content')
+                div(style='display: flex;')
+                    div(id='circle' style='margin-top: 8px;')
+                    p(class='card-leaving') Leaving #{h.departureDate}
+                div(id='rectangle')
+                div(style='display: flex;')
+                    div(id='circle' style='margin-bottom: 3px;')
+                    p(class='card-arriving') Arriving #{h.arrivalDate}
+                p(class='card-driver') Driven by #{h.driver}
+            div(class='card-footer')
+                p(class='card-price' style='padding-top: 12px; color: #348246;') Price: $#{h.price}
+                button(class='delete-button' id='' + h.driver + ',' + h.departureDate) Delete
+
+                button(class='seeRiders-button ' + h.id, id='' + h.driver + ',' + h.departureDate, class='seeRiders-button ' + h.id, style='width: 150px;') See Riders
+
+            div(id='riders-' + h.id)
