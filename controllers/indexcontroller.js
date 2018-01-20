@@ -71,8 +71,8 @@ app.post('/login', function(req, res){
       });
 });
 
-var file = require('./fileController.js');
-app.post('/parsePdf',file.parsePdf);
+/*var file = require('./fileController.js');
+app.post('/parsePdf',file.parsePdf);*/
 
 
 app.get('/logout', function(req, res){
