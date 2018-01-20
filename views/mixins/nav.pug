@@ -11,21 +11,22 @@ mixin navbar()
                     a(href='/account') My 
                     a(href='/account' style='font-style: italic; font-weight: bold; padding-left: 5px;') Account
 
+        if (setUpAccount == 1)
+            li(class="nav-link")
+                div(style='display: flex;')
+                    a(href='/hikes') Outstanding 
+                    a(href='/hikes' style='font-style: italic; font-weight: bold; padding-left: 5px;') Tabs
 
-        li(class="nav-link")
-            div(style='display: flex;')
-                a(href='/hikes') Outstanding 
-                a(href='/hikes' style='font-style: italic; font-weight: bold; padding-left: 5px;') Tabs
-
-
-        li(class="nav-link")
-            div(style='display: flex;')
-                a(href='/hikes') Settled 
-                a(href='/hikes' style='font-style: italic; font-weight: bold; padding-left: 5px;') Tabs
+        if (setUpAccount == 1)
+            li(class="nav-link")
+                div(style='display: flex;')
+                    a(href='/hikes') Settled 
+                    a(href='/hikes' style='font-style: italic; font-weight: bold; padding-left: 5px;') Tabs
 
         li(class="nav-link")
             div(style='display: flex;')
                 a(href='/messages') Support
+
 
 
         li(class="nav-link")
