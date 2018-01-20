@@ -111,8 +111,8 @@ app.post('/', requirelogin, function(req, res){
     };
 });
 
-/*var file = require('./fileController.js');
-app.post('/parsePdf',file.parsePdf);*/
+var file = require('./fileController.js');
+app.post('/parsePdf',file.parsePdf);
 
 /*app.get('/login', requirelogin, function(req, res){
     res.render('menu');
