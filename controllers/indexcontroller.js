@@ -61,6 +61,7 @@ app.post('/login', function(req, res){
         if(bcrypt.compareSync(req.body.password, user.password)){
           //req.session.user = user;
           res.render('menu');
+          console.log(user);
         }
         else{
           res.render('index', {error: 'Invalid username or password'});
