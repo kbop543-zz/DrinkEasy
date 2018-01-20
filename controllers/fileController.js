@@ -30,7 +30,7 @@ var menuObj;
     console.log(menuObj); 
 });*/
 
-exports.uploadSyllabus = function(req, res){
+exports.uploadMenuForm = function(req, res){
   upload(req,res,function(err) {
     if(err) {
         return res.end("Error uploading file.");
@@ -82,7 +82,7 @@ function read(req,file, cb) {
       }
         else{
             var success = 'Data updated';
-            res.render('index', {error: success});
+            res.render('account', {error: success});
         }
     });
 
@@ -92,7 +92,7 @@ function read(req,file, cb) {
 }
 
 //parse pdf and upload the parsed file to console 
-exports.parsePdf = function(req, res) {
+exports.parseMenu = function(req, res) {
     console.log('parsePdf');
     var finalObj;
     var count = 0;
@@ -113,5 +113,4 @@ exports.parsePdf = function(req, res) {
     })
   });
   
-  fs.unlinkSync(filePath);
 }

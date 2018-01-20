@@ -1,0 +1,45 @@
+include mixins/hikecard
+include mixins/nav
+
+head
+    title=title
+
+    link(rel='stylesheet', href='/assets/css/global.css')
+    link(rel='stylesheet' href='/assets/css/reset.css')
+    link(rel='stylesheet' href='/assets/css/menu.css')
+    link(rel='stylesheet' href='/assets/css/nav.css')
+    link(rel='stylesheet' href='/assets/css/hikecard.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js')
+    script(src='/assets/scripts/dashboard.js' type='text/javascript')
+body
+    +navbar()
+
+
+div(class="content")
+        div(class="card-container")
+            br
+            br
+            br
+            br
+            div(id="update-card" )
+                p(id='card-title') First things first, Add your drink menu and complete your profile!
+
+                form(action="/uploadMenuForm" method="POST" enctype='multipart/form-data' id="uploadMenu" name="uploadMenu")
+                    input(type="file" name="file" multiple)
+                    br
+                    br
+                    
+
+                    p(id='instruction') Do you want users to be able to keep tabs?
+
+                    input(type="radio" name="yes_no" value='1' id='KeepTabs') 
+                    | Yes
+                    input(type="radio" name="yes_no" ) 
+                    | No
+                    br
+                    br
+
+                    input(type="submit" value="Upload")
+                    input(type="reset" value="Reset")
+                    
+                    

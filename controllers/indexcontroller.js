@@ -75,7 +75,7 @@ app.post('/login', function(req, res){
       else{
         if(bcrypt.compareSync(req.body.password, user.password)){
           req.session.user = user;
-          res.render('menu');
+          res.render('uploadMenu');
           console.log(user);
         }
         else{
@@ -87,7 +87,8 @@ app.post('/login', function(req, res){
 
 
 var file = require('./fileController.js');
-app.post('/parsePdf',file.parsePdf);
+app.post('/uploadMenuForm',file.uploadMenuForm);
+app.post('/parseMenu',file.parseMenu);
 
 app.get('/login', requirelogin, function(req, res){
     res.render('menu');
