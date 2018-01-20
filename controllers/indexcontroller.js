@@ -14,7 +14,7 @@ var requirelogin = function requirelogin(req, res, next){
 };
 
 module.exports = function(app){
-    
+
 //middleware function for sessions
 app.use(function(req, res, next){
     if(req.session && req.session.user){
@@ -31,7 +31,7 @@ app.use(function(req, res, next){
     else{
       next();
     }
-    });
+});
 
 
 app.get('/', function(req, res) {
@@ -86,14 +86,14 @@ app.post('/login', function(req, res){
 app.get('/login', requirelogin, function(req, res){
     res.render('menu', {email: req.user.email, barname: req.user.nameOfBar, password: req.user.password, address:req.user.address});
 });
-    
+
 app.delete('/', requirelogin, (req, res, next) => {
   User.findOneAndRemove({email: req.user.email}, (err) => {
     if (err) {
       var error = "Oops! Something went wrong!";
       res.render('uploadMenu', {error: error});
     }
-    
+
       var success = "Successfully deleted";
       req.logout();
       res.render('index', {error: success});

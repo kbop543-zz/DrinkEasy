@@ -1,6 +1,6 @@
 var Bill = require('../models/outstanding');
-// var bcrypt = require('bcrypt');
-// var Menu = require('../models/menu');
+var bcrypt = require('bcrypt');
+var Menu = require('../models/menu');
 
 module.exports = function(app){
 
@@ -16,6 +16,12 @@ module.exports = function(app){
             console.log(user);
             }
           });
+      });
+
+      app.get('/', function(req, res) {
+        res.render('outstanding', {
+          title: 'DrinkEasy'
+              });
       });
 
   };
