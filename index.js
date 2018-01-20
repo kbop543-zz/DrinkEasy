@@ -9,11 +9,9 @@ var indexController = require('./controllers/indexcontroller');
 
 var app = express();
 
+
 app.set('view engine', 'pug');
 app.use(express.static(__dirname));
-
-
-
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies

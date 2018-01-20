@@ -4,8 +4,8 @@ var bcrypt = require('bcrypt');
 //use for pages that require login
 var requirelogin = function requirelogin(req, res, next){
     if(!req.user){
-      res.render('home', {
-        Message: 'Please log in',
+      res.render('index', {
+        error: 'Please log in',
         partials: {
             content: 'login'
         }
@@ -14,7 +14,7 @@ var requirelogin = function requirelogin(req, res, next){
     else{
       next();
     }
-}
+};
 
 module.exports = function(app){
     
@@ -84,6 +84,10 @@ app.post('/login', function(req, res){
       }
       });
 });
+
+app.get('/login', requirelogin, function(req, res){
+    res.render('menu');
+  });
 
 app.get('/logout', function(req, res){
     req.session.reset();
