@@ -39,18 +39,21 @@ div(class="content")
                     input(type="radio" name="yes_no" ) 
                     | No
                     
-                    div(class='section')
-                        form(id='updateInfo' name='info')
+                    if typeof error !== 'undefined' && error.length > 0
+                        error(class='error')=error
+                    
+                div(class='section')
+                    form(id='updateInfo' name='info' action='/dashboard' method='put')
                            
-                            input(id='email' class='user-info' type='email' placeholder='Email' name='email' value=email disabled, required, pattern='[A-Za-z0-9_]{3,20}' title='Needs to be 3-20 characters and Alphanumeric')
+                        input(id='email' class='user-info' type='email' placeholder='Email' name='email' value=email disabled, required)
 
-                            input(id='password' class='user-info' type='password' placeholder='Password' value=password name='password',pattern='[A-Za-z0-9_]{3,20}',title='Needs to be 3-20 characters and Alphanumeric')
+                        input(id='password' class='user-info' type='password' placeholder='Password' value=password name='password')
 
-                            input(id='nameOfBar' class='user-info' type='text' placeholder='Name of Bar' value=barname name='nameOfBar', required, pattern='^[A-z]+$' title='Alphabetic letters only')
+                        input(id='nameOfBar' class='user-info' type='text' placeholder='Name of Bar' value=barname name='nameOfBar', required)
 
-                            input(id='Address' class='user-info' type='text' placeholder='Address' value=address name='Address', required, pattern='^[A-z]+$' title='Alphabetic letters only')
+                        input(id='Address' class='user-info' type='text' placeholder='Address' value=address name='address', required)
 
-                            input(id='updateUserButton' class='user-info-button' type='submit' value='Save Changes')
+                        input(id='updateUserButton' class='user-info-button' type='submit' value='Save Changes')
 
-                        button(id='deleteUser') Delete Account
-                        br
+                button(id='deleteUser' action='/' method='delete') Delete Account
+                br

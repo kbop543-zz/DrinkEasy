@@ -69,3 +69,7 @@ button:hover {
     background: #AA0008;
 
 }
+
+.error{
+    color: red;
+}
