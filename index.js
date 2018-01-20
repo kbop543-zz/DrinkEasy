@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var sessions = require('client-sessions');
 
 //define controllers
-var indexController = require('./controllers/indexcontroller');
+var indexController = require('./controllers/indexController');
 var menuController = require('./controllers/menuController');
 
 var app = express();

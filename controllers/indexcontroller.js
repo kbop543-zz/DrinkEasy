@@ -5,10 +5,7 @@ var bcrypt = require('bcrypt');
 var requirelogin = function requirelogin(req, res, next){
     if(!req.user){
       res.render('index', {
-        error: 'Please log in',
-        partials: {
-            content: 'login'
-        }
+        error: 'Please log in'
    });
     }
     else{
@@ -39,7 +36,7 @@ app.use(function(req, res, next){
 
 app.get('/', function(req, res) {
 
-	res.render('index', {
+  res.render('index', {
     title: 'DrinkEasy'
         });
 });
@@ -47,13 +44,13 @@ app.get('/', function(req, res) {
 app.post('/signup', function(req, res){
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = new User({
-        nameofbar: req.body.nameOfBar,
+        nameOfBar: req.body.nameOfBar,
         email: req.body.email,
         password: hash,
         address: req.body.address
    });
-    console.log(user);
-    user.save(function(err){
+    console.log("user for signup " + user);
+    user.save(function(err, theuser){
       if(err){
         var error = 'Oops something bad happened! Try again';
         res.render('index', {error: error});
@@ -62,6 +59,7 @@ app.post('/signup', function(req, res){
         else{
             var success = 'Sign up successful! Please log in';
             res.render('index', {error: success});
+            console.log(theuser);
         }
     });
 });
@@ -70,13 +68,13 @@ app.post('/login', function(req, res){
     User.findOne({email: req.body.email}, function(err, user){
       if (!user){
          res.render('index', {error: 'Invalid username or password'});
-         console.log(user);
+         console.log("user for login is " + user);
       }
       else{
         if(bcrypt.compareSync(req.body.password, user.password)){
           req.session.user = user;
-          res.render('uploadMenu');
-          console.log(user);
+          res.render('uploadMenu', {email: user.email, barname: user.nameOfBar, password: req.body.password, address:user.address});
+          console.log("user successfully logged in" + user.email);
         }
         else{
           res.render('index', {error: 'Invalid username or password'});
@@ -85,14 +83,38 @@ app.post('/login', function(req, res){
       });
 });
 
+app.get('/login', requirelogin, function(req, res){
+    res.render('menu', {email: req.user.email, barname: req.user.nameOfBar, password: req.user.password, address:req.user.address});
+});
+    
+app.delete('/', requirelogin, (req, res, next) => {
+  User.findOneAndRemove({email: req.user.email}, (err) => {
+    if (err) {
+      var error = "Oops! Something went wrong!";
+      res.render('uploadMenu', {error: error});
+    }
+    
+      var success = "Successfully deleted";
+      req.logout();
+      res.render('index', {error: success});
+  });
+});
 
+app.post('/', requirelogin, function(req, res){
+    User.remove({email: req.session.user.email}), function(err) {
+    if (!err) {
+        var success = "Successfully deleted"
+        res.render('index', {error: success});
+    }
+    else {
+        var error = "Oops! Something went wrong!";
+        res.render('uploadMenu', {error: error});
+    }
+    };
+});
 var file = require('./fileController.js');
 app.post('/uploadMenuForm',file.uploadMenuForm);
 app.post('/parseMenu',file.parseMenu);
-
-app.get('/login', requirelogin, function(req, res){
-    res.render('menu');
-  });
 
 
 app.get('/logout', function(req, res){

@@ -6,10 +6,6 @@ mongoose.connect('mongodb://drinkeasy:drinkeasy@ds263847.mlab.com:63847/drinkeas
 
 //create User model
 var userSchema = mongoose.Schema({
-  id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
   nameOfBar: {
     type: String,
     required: true

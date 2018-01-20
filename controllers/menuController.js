@@ -6,10 +6,7 @@ var Menu = require('../models/menu');
 var requirelogin = function requirelogin(req, res, next){
     if(!req.user){
       res.render('index', {
-        error: 'Please log in',
-        partials: {
-            content: 'login'
-        }
+        error: 'Please log in'
    });
     }
     else{
@@ -38,18 +35,69 @@ app.use(function(req, res, next){
     });
 
 app.get('/dashboard', requirelogin, function(req, res){
-    User.findOne({email: req.body.email}, function(err, user){
+    /*User.findOne({email: req.user.email}, function(err, user){
+      console.log("user email is " + req.user.email);
       if (!user){
-         res.render('index', {error: 'Please log in'});
-         console.log(user);
+         res.render('menu', {error: 'Please log in'});
+         console.log("user not found " + user);
       }
       else{
         req.session.user = user;
-        res.render('menu', {email: user.email, barname: user.nameofbar, password: user.password, address:user.address});
-        console.log(user);
+        res.render('menu', {email: user.email, barname: user.nameofbar, password: req.body.password, address:user.address});
+        console.log("user found " + user);
         }
-      });
+      });*/
+    //var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+   /* var user = new User({
+        nameOfBar: req.body.nameOfBar,
+        email: req.body.email,
+        password: req.body.password,
+        address: req.body.address
+   });*/
+    // console.log("user dashboard" + user);
+    console.log(req.body);
+    User.findOneAndUpdate({email: req.body.email}, 
+                          {
+        nameOfBar: req.body.nameOfBar,
+        email: req.body.email,
+        password: req.body.password,
+        address: req.body.address
+        
+    }, function(err){
+      if(err){
+        var error = 'Oops something bad happened! Try again';
+        res.render('menu', {email: user.email, barname: user.nameofbar, password: req.body.password, address:user.address, error:error});
+        console.log("error updating: " + err);
+      }
+        else{
+            var success = 'Saved!';
+            res.render('menu', {error: success});
+            console.log("new info updated ");
+        }
+    });
   });
 
-    
-};
+app.put('/dashboard', requirelogin, function(req, res){
+    var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+    var user = new User({
+        nameofbar: req.body.nameOfBar,
+        email: req.body.email,
+        password: hash,
+        address: req.body.address
+   });
+    delete user._id;
+    console.log("user dashboard" + user);
+    User.findOneAndUpdate({email: user.email}, user, {upsert: true}, function(err){
+      if(err){
+        var error = 'Oops something bad happened! Try again';
+        res.render('menu', {email: user.email, barname: user.nameofbar, password: req.body.password, address:user.address, error:error});
+        console.log("error updating: " + err);
+      }
+        else{
+            var success = 'Saved!';
+            res.render('menu', {error: success});
+            console.log("new info updated ");
+        }
+    });
+  });
+}
