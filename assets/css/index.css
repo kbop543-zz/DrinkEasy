@@ -1,5 +1,66 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 #logo {
     width: 240px;
     font-size: 46px;
     margin-bottom: 50px;
+}
+
+#signupForm {
+    width: 220px;
+    padding: 15px;
+    font-size: 12px;
+}
+
+#signupButton {
+    background: none;
+    border: none;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: hand;
+    padding-left: 3px;
+}
+
+.center {
+    text-align: center;
+    margin: auto;
+    width: 70px;
+}
+
+.login-button {
+    color: white;
+    margin: 8px;
+    padding: 10px;
+    width: 270px;
+    border-radius: 5px;
+    border: none;
+    font-size: 12px;
+    background: #226666;
+}
+
+.login-button:hover {
+    background: #ff1100;
+    cursor: hand;
+}
+
+.login-field {
+    margin: 8px;
+    padding: 10px;
+    width: 270px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(128,128,128, 0.2);
+}
+
+#signup {
+    display: none;
 }

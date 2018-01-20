@@ -1,15 +1,38 @@
 head
     title #{title}
 
+    link(rel='stylesheet', href='/assets/css/global.css')
+    link(rel='stylesheet', href='/assets/css/reset.css')
     link(rel='stylesheet', href='/assets/css/index.css')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js')
-
-    body
-        div(class='center' id='logo' style='display: flex;')
-            p DrinkEasy
-
+    script(src='/assets/scripts/login.js', type='text/javascript')
     
-
-
-
-        
+body
+    div(class='center' id='logo' style='display: flex;')
+        p Drink
+        p(style='font-style: italic; font-weight: bold;') Easy
+    content 
+        div(class='login-form')
+            form(id='login' name='input')
+                input(class='login-field' type='email' name='email' placeholder='EMAIL',required)
+                br
+                input(class='login-field' type='password' name='password' placeholder='PASSWORD',required,pattern='[A-Za-z0-9_]{3,20}',title='Needs to be 3-20 characters and Alphanumeric')
+                br
+                input(id='signInButton' class='login-button' type='submit' value='LOGIN')
+        div(class='center' id='signupForm' style='display: flex;')
+            p Don't have an account? 
+            p(id='signupButton') Sign up
+        form(id='signup' name='signup')
+            //email
+            input(class='login-field' type='email' placeholder='EMAIL' name='email',required)
+            br
+            //password
+            input(class='login-field' type='password' placeholder='PASSWORD' name='password' ,required,pattern='[A-Za-z0-9_]{3,20}',title='Needs to be 3-20 characters and Alphanumeric')
+            br
+            //first name
+            input(class='login-field' type='text' placeholder='NAME OF BAR' name='nameOfBar',required,pattern='^[A-z]+$' title='Alphabetic letters only')
+            br
+            //last name
+            input(class='login-field' type='text' placeholder='ADDRESS' name='lastName',required)
+            br            
+            input(id='createAccount' class='login-button' type='submit' value='CREATE ACCOUNT')
