@@ -43,11 +43,11 @@ div(class="content")
                         error(class='error')=error
                     
                 div(class='section')
-                    form(id='updateInfo' name='info' action='/dashboard' method='put')
+                    form(id='updateInfo' name='info' action='/dashboard' method="GET")
                            
                         input(id='email' class='user-info' type='email' placeholder='Email' name='email' value=email disabled, required)
 
-                        input(id='password' class='user-info' type='password' placeholder='Password' value=password name='password')
+                        input(id='password' class='user-info' type='password' placeholder='Password' value=password name='password', required)
 
                         input(id='nameOfBar' class='user-info' type='text' placeholder='Name of Bar' value=barname name='nameOfBar', required)
 

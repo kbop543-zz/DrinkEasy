@@ -19,11 +19,6 @@ var drinkSchema = mongoose.Schema({
 
 //create User model
 var menuSchema = mongoose.Schema({
-  id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Menu'
-  },
-  
   email: {
     type: String,
     required: true,

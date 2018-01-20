@@ -5,10 +5,7 @@ var bcrypt = require('bcrypt');
 var requirelogin = function requirelogin(req, res, next){
     if(!req.user){
       res.render('index', {
-        error: 'Please log in',
-        partials: {
-            content: 'login'
-        }
+        error: 'Please log in'
    });
     }
     else{
@@ -47,13 +44,13 @@ app.get('/', function(req, res) {
 app.post('/signup', function(req, res){
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = new User({
-        nameofbar: req.body.nameOfBar,
+        nameOfBar: req.body.nameOfBar,
         email: req.body.email,
         password: hash,
         address: req.body.address
    });
-    console.log(user);
-    user.save(function(err){
+    console.log("user for signup " + user);
+    user.save(function(err, theuser){
       if(err){
         var error = 'Oops something bad happened! Try again';
         res.render('index', {error: error});
@@ -62,6 +59,7 @@ app.post('/signup', function(req, res){
         else{
             var success = 'Sign up successful! Please log in';
             res.render('index', {error: success});
+            console.log(theuser);
         }
     });
 });
@@ -70,19 +68,23 @@ app.post('/login', function(req, res){
     User.findOne({email: req.body.email}, function(err, user){
       if (!user){
          res.render('index', {error: 'Invalid username or password'});
-         console.log(user);
+         console.log("user for login is " + user);
       }
       else{
         if(bcrypt.compareSync(req.body.password, user.password)){
           req.session.user = user;
-          res.render('menu', {email: user.email, barname: user.nameofbar, password: req.body.password, address:user.address});
-          console.log(user.email);
+          res.render('menu', {email: user.email, barname: user.nameOfBar, password: req.body.password, address:user.address});
+          console.log("user successfully logged in" + user.email);
         }
         else{
           res.render('index', {error: 'Invalid username or password'});
         }
       }
       });
+});
+
+app.get('/login', requirelogin, function(req, res){
+    res.render('menu', {email: req.user.email, barname: req.user.nameOfBar, password: req.user.password, address:req.user.address});
 });
     
 app.delete('/', requirelogin, (req, res, next) => {
@@ -113,10 +115,6 @@ app.post('/', requirelogin, function(req, res){
 
 var file = require('./fileController.js');
 app.post('/parsePdf',file.parsePdf);
-
-/*app.get('/login', requirelogin, function(req, res){
-    res.render('menu');
-  });*/
 
 
 app.get('/logout', function(req, res){
