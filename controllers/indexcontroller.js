@@ -1,5 +1,6 @@
 var User = require('../models/user');
 var bcrypt = require('bcrypt');
+var multer  =   require('multer');
 
 module.exports = function(app){
     
@@ -69,6 +70,9 @@ app.post('/login', function(req, res){
       }
       });
 });
+
+var file = require('./fileController.js');
+app.post('/parsePdf',file.parsePdf);
 
 
 app.get('/logout', function(req, res){
