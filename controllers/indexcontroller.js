@@ -75,8 +75,8 @@ app.post('/login', function(req, res){
       else{
         if(bcrypt.compareSync(req.body.password, user.password)){
           req.session.user = user;
-          res.render('menu', {email: user.email, barname: user.nameofbar, password: req.body.password, address:user.address});
-          console.log(user.email);
+          res.render('menu');
+          console.log(user);
         }
         else{
           res.render('index', {error: 'Invalid username or password'});
@@ -84,39 +84,14 @@ app.post('/login', function(req, res){
       }
       });
 });
-    
-app.delete('/', requirelogin, (req, res, next) => {
-  User.findOneAndRemove({email: req.user.email}, (err) => {
-    if (err) {
-      var error = "Oops! Something went wrong!";
-      res.render('menu', {error: error});
-    }
-    
-      var success = "Successfully deleted";
-      req.logout();
-      res.render('index', {error: success});
-  });
-});
 
-app.post('/', requirelogin, function(req, res){
-    User.remove({email: req.session.user.email}), function(err) {
-    if (!err) {
-        var success = "Successfully deleted"
-        res.render('index', {error: success});
-    }
-    else {
-        var error = "Oops! Something went wrong!";
-        res.render('menu', {error: error});
-    }
-    };
-});
 
 var file = require('./fileController.js');
 app.post('/parsePdf',file.parsePdf);
 
-/*app.get('/login', requirelogin, function(req, res){
+app.get('/login', requirelogin, function(req, res){
     res.render('menu');
-  });*/
+  });
 
 
 app.get('/logout', function(req, res){

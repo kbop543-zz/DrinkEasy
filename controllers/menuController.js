@@ -40,37 +40,15 @@ app.use(function(req, res, next){
 app.get('/dashboard', requirelogin, function(req, res){
     User.findOne({email: req.body.email}, function(err, user){
       if (!user){
-         res.render('menu', {error: 'Please log in'});
+         res.render('index', {error: 'Please log in'});
          console.log(user);
       }
       else{
         req.session.user = user;
-        res.render('menu');
+        res.render('menu', {email: user.email, barname: user.nameofbar, password: user.password, address:user.address});
         console.log(user);
         }
       });
-  });
-
-app.put('/dashboard', requirelogin, function(req, res){
-    var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-    var user = new User({
-        nameofbar: req.body.nameOfBar,
-        email: req.body.email,
-        password: hash,
-        address: req.body.address
-   });
-    console.log(user);
-    user.update(function(err){
-      if(err){
-        var error = 'Oops something bad happened! Try again';
-        res.render('menu', {error: error});
-        console.log(err);
-      }
-        else{
-            var success = 'Saved!';
-            res.render('menu', {error: success});
-        }
-    });
   });
 
     
