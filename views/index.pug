@@ -11,7 +11,8 @@ body
         p(style='font-style: italic; font-weight: bold;') Easy
     content
         if typeof error !== 'undefined' && error.length > 0
-            error=error
+            error(class='error')=error
+            
         div(class='login-form')
             form(id='login' name='input' action='\login' method='post')
                 input(class='login-field' type='email' name='email' placeholder='EMAIL',required)

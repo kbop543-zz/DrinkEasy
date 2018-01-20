@@ -2,6 +2,21 @@ var User = require('../models/user');
 var bcrypt = require('bcrypt');
 var multer  =   require('multer');
 
+//use for pages that require login
+var requirelogin = function requirelogin(req, res, next){
+    if(!req.user){
+      res.render('index', {
+        error: 'Please log in',
+        partials: {
+            content: 'login'
+        }
+   });
+    }
+    else{
+      next();
+    }
+};
+
 module.exports = function(app){
     
 //middleware function for sessions
@@ -60,7 +75,7 @@ app.post('/login', function(req, res){
       }
       else{
         if(bcrypt.compareSync(req.body.password, user.password)){
-          //req.session.user = user;
+          req.session.user = user;
           res.render('menu');
           console.log(user);
         }
@@ -71,12 +86,18 @@ app.post('/login', function(req, res){
       });
 });
 
+
 /*var file = require('./fileController.js');
 app.post('/parsePdf',file.parsePdf);*/
+
+app.get('/login', requirelogin, function(req, res){
+    res.render('menu');
+  });
 
 
 app.get('/logout', function(req, res){
     req.session.reset();
     res.redirect('/');
   });
+
 };
