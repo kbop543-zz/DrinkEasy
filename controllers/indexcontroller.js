@@ -32,15 +32,17 @@ app.get('/', function(req, res) {
 app.post('/signup', function(req, res){
     var hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
     var user = new User({
-       name: req.body.name,
+        nameofbar: req.body.nameOfBar,
         email: req.body.email,
         password: hash,
         address: req.body.address
    });
+    console.log(user);
     user.save(function(err){
       if(err){
         var error = 'Oops something bad happened! Try again';
         res.render('index', {error: error});
+        console.log(err);
       }
         else{
             var success = 'Sign up successful! Please log in';
@@ -53,11 +55,12 @@ app.post('/login', function(req, res){
     User.findOne({email: req.body.email}, function(err, user){
       if (!user){
          res.render('index', {error: 'Invalid username or password'});
+         console.log(user);
       }
       else{
         if(bcrypt.compareSync(req.body.password, user.password)){
-          req.session.user = user;
-          res.redirect('/dashboard');
+          //req.session.user = user;
+          res.render('menu');
         }
         else{
           res.render('index', {error: 'Invalid username or password'});
@@ -65,8 +68,8 @@ app.post('/login', function(req, res){
       }
       });
 });
-    
- 
+
+
 app.get('/logout', function(req, res){
     req.session.reset();
     res.redirect('/');

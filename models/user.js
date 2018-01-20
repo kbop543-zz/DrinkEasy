@@ -10,7 +10,7 @@ var userSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  name: {
+  nameofbar: {
     type: String,
     required: true
   },
