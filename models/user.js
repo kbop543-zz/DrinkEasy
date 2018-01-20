@@ -6,6 +6,10 @@ mongoose.connect('mongodb://drinkeasy:drinkeasy@ds263847.mlab.com:63847/drinkeas
 
 //create User model
 var userSchema = mongoose.Schema({
+  id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   name: {
     type: String,
     required: true
@@ -19,26 +23,7 @@ var userSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  address1: {
-      type: String,
-      required: true
-  },
-  address2: {
-      type: String
-  },
-  city: {
-      type: String,
-      required: true
-  },
-  state: {
-      type: String,
-      required: true
-  },
-  post: {
-      type: String,
-      required: true
-  },
-  country: {
+  address: {
       type: String,
       required: true
   }

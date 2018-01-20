@@ -3,6 +3,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 
+//define controllers
+var indexController = require('./controllers/indexcontroller');
 
 var app = express();
 
@@ -17,25 +19,10 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 
-// Main page. 
-app.get('/', function(req, res) {
-
-	res.render('index', {
-    title: 'DrinkEasy'
-        });
-})
-
 
 
 //Routes
-
-/*app.get('/applicants', ta.findAll);
-
-app.post('/applicants', ta.addOne);
-
-app.delete('/applicants', ta.delOne);
-
-app.get('/courses', ta.findWithCourses);*/
+indexController(app);
 
 
 // Start the server
