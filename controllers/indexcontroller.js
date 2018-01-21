@@ -88,6 +88,10 @@ app.post('/login', function(req, res){
 app.get('/login', requirelogin, function(req, res){
     res.render('menu', {email: req.user.email, barname: req.user.nameOfBar, password: req.user.password, address:req.user.address});
 });
+
+app.get('/account', function(req, res){
+    res.render('account',);
+});
     
 app.delete('/', requirelogin, (req, res, next) => {
   User.findOneAndRemove({email: req.user.email}, (err) => {

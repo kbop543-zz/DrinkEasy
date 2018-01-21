@@ -66,21 +66,55 @@ function read(res,req,file, cb) {
     });
     
     var temp = {"menu" : barData}
-
     var uploadedMenu = new Menu(temp.menu[0]);
 
 
-    uploadedMenu.save(function(err){
-      if(err){
-        var error = 'Oops something bad happened! Try again';
-        res.render('menu', {error: error});
-        console.log(err);
-      }
-        else{
-            var success = 'Data updated';
-            res.render('menu', {error: success});
-        }
-    });
+    //find the menu
+
+    Menu.findOne({
+            'email': dataJson.email
+        }, function(err, foundMenu) {
+            if (err) throw err;
+            console.log(foundMenu);
+
+            if (foundMenu != undefined) {
+
+                // Remove the menu 
+                Menu.remove({
+                    'email': dataJson.email
+                }, function(err) {
+
+                    
+
+                    uploadedMenu.save(function(err){
+                      if(err){
+                        var error = 'Oops something bad happened! Try again';
+                        res.render('menu', {error: error});
+                        console.log(err);
+                      }
+                        else{
+                            var success = 'Data updated';
+                            res.render('menu', {error: success});
+                        }
+                    });
+                });
+
+            } else {
+
+                    uploadedMenu.save(function(err){
+                      if(err){
+                        var error = 'Oops something bad happened! Try again';
+                        res.render('menu', {error: error});
+                        console.log(err);
+                      }
+                        else{
+                            var success = 'Data updated';
+                            res.render('menu', {error: success});
+                        }
+                    });
+            }
+        });
+    res.send(uploadedMenu);
 
     
   fs.unlinkSync(filePath);
