@@ -22,6 +22,11 @@ var userSchema = mongoose.Schema({
   address: {
       type: String,
       required: true
+  },
+  setUpMenu: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 });
 

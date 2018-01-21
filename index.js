@@ -7,7 +7,7 @@ var sessions = require('client-sessions');
 //define controllers
 var indexController = require('./controllers/indexController');
 var menuController = require('./controllers/menuController');
-var billController = require('./controllers/billController');
+//var billController = require('./controllers/billController');
 
 var app = express();
 
@@ -32,7 +32,7 @@ app.use(sessions({
 //Routes
 indexController(app);
 menuController(app);
-billController(app);
+//billController(app);
 
 
 // Start the server

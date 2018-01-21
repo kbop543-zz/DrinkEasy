@@ -22,7 +22,12 @@ div(class="content")
             br
             br
             div(id="update-card" )
-                p(id='card-title') First things first, Add your drink menu and complete your profile!
+                p(id='card-title') 
+
+                if alreadySetUp
+                    h2 Reupload your menu below
+                else
+                    h2 First things first, Add your drink menu and complete your profile!
 
                 form(action="/uploadMenuForm" method="POST" enctype='multipart/form-data' id="uploadMenu" name="uploadMenu")
                     input(type="file" name="file" multiple)
