@@ -12,4 +12,8 @@ module.exports = function(app){
           res.render('outstanding', { title: 'DrinkEasy' });
       });
 
+      app.get('/money-requests/send', function(req, res){
+          res.render('billPreviews');
+      });
+
   };

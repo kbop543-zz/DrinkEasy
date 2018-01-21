@@ -91,7 +91,7 @@ app.get('/login', requirelogin, function(req, res){
 
 
 app.get('/account', function(req, res){
-    res.render('account',);
+    res.render('account');
 });
     
 app.delete('/', requirelogin, (req, res, next) => {
