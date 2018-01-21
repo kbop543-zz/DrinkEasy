@@ -123,33 +123,10 @@ app.get('/login', requirelogin, function(req, res){
      });
 })
 
-app.get('/outstanding', function(req,res){
-  Menu.findOne({email: req.session.user.email}, function(err, menu){
-    console.log(req.session.user.email);
-    console.log(menu);
-    if (!menu){
-      res.render('billPreviews',
-      {email: req.user.email,
-         barname: req.user.nameOfBar,
-          password: req.user.password,
-           address:req.user.address,
-         alreadySetUp: false});
-       }else{
-         res.render('billPreviews',
-         {email: req.user.email,
-            barname: req.user.nameOfBar,
-             password: req.user.password,
-              address:req.user.address,
-            alreadySetUp: true});
-       }
-     });
-})
 
 
 app.get('/account', function(req, res){
-<<<<<<< HEAD
     res.render('account');
-=======
     Menu.findOne({email: req.session.user.email}, function(err, menu){
       if (!menu){
          res.render('account', {alreadySetUp: false});
@@ -160,7 +137,7 @@ app.get('/account', function(req, res){
       }
     })
 
->>>>>>> 55a3608053443e9f3c5cf60f61cb688487ed26c2
+
 });
 
 app.get('/menu', function(req, res){

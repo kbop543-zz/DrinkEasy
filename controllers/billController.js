@@ -4,13 +4,27 @@ var Menu = require('../models/menu');
 
 module.exports = function(app){
 
-    /*app.get('/show', function(req, res){
-        res.render('billPreviews');
-      });
-
-      app.get('/outstanding', function(req, res) {
-          res.render('outstanding', { title: 'DrinkEasy' });
-      });*/
+  app.get('/outstanding', function(req,res){
+    Menu.findOne({email: req.session.user.email}, function(err, menu){
+      console.log(req.session.user.email);
+      console.log(menu);
+      if (!menu){
+        res.render('billPreviews',
+        {email: req.user.email,
+           barname: req.user.nameOfBar,
+            password: req.user.password,
+             address:req.user.address,
+           alreadySetUp: false});
+         }else{
+           res.render('billPreviews',
+           {email: req.user.email,
+              barname: req.user.nameOfBar,
+               password: req.user.password,
+                address:req.user.address,
+              alreadySetUp: true});
+         }
+       });
+  })
 
       app.get('/money-requests/send', function(req, res){
           res.render('billPreviews');
