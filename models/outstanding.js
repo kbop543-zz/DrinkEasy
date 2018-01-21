@@ -20,10 +20,6 @@ var drinksSchema = mongoose.Schema({
 
 //create User model
 var billSchema = mongoose.Schema({
-  id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Bill'
-  },
   barID: {
     type: String,
     required: true,
