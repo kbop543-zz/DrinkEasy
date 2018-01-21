@@ -19,11 +19,10 @@ var drinksSchema = mongoose.Schema({
 });
 
 //create User model
-var billSchema = mongoose.Schema({
+var outstandingSchema = mongoose.Schema({
   barID: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   customerID: {
     type: String,
@@ -31,7 +30,17 @@ var billSchema = mongoose.Schema({
     unique: true
   },
 
-  drinks: [drinksSchema]
+  drinks: [drinksSchema],
+
+  ready : {
+    type: Boolean,
+    required: true,
+    default: false
+  },
+
+  totalPrice : {
+    type: Number
+  }
 });
 
-module.exports = mongoose.model('Bill', billSchema);
+module.exports = mongoose.model('Outstanding', outstandingSchema);

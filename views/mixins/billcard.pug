@@ -1,0 +1,13 @@
+mixin billcard(b)
+    div(class='card')
+        div(class='card-container')
+            div('card-content')
+                br
+                p(class='card-customerId') Customer: #{b.customerID}
+                br
+                p(class='card-totalPrice') Price:$ #{b.totalPrice}
+                br
+                p(class='card-ready') Ready To Pay: #{b.ready}
+                br
+                p(class='card-drinks') Drinks:  #{b.drinks}
+                button.button(onclick="alert('Request has been sent!')") REQUEST FUNDS

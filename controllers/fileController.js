@@ -37,7 +37,6 @@ function uploadMenuForm(req, res){
 
 /*helper function to split text file line by line and read*/
 function read(res,req,file, cb) {
-  console.log("About to read file.");
   var filePath = './uploads/'+file;
 
   var barData = [];
@@ -48,7 +47,6 @@ function read(res,req,file, cb) {
 
 
     for(let i in dataJson.drinks){
-      console.log(dataJson);
 
       menu.push({
           "drinkName": dataJson.drinks[i].drinkName,
@@ -69,7 +67,6 @@ function read(res,req,file, cb) {
 
     var temp = {"menu" : barData}
     var uploadedMenu = new Menu(temp.menu[0]);
-    console.log(uploadedMenu);
 
 
     //find the menu
@@ -78,9 +75,9 @@ function read(res,req,file, cb) {
             'email': dataJson.email
         }, function(err, foundMenu) {
             if (err) throw err;
-            console.log(foundMenu);
 
-            if (foundMenu != undefined) {
+            if (foundMenu != null) {
+              console.log("menu already existed. replacing it");
 
                 // Remove the menu
                 Menu.remove({
@@ -103,6 +100,8 @@ function read(res,req,file, cb) {
                 });
 
             } else {
+              console.log("menu didnt exist. adding brand new menu");
+              console.log(uploadedMenu);
 
                     uploadedMenu.save(function(err){
                       if(err){
