@@ -14,14 +14,19 @@ head
 body
     +navbar()
 
+    h2(id='menuTitle') Menu
 
-div(class="content")
-        div(class="card-container")
-            br
-            br
-            br
-            br
-            div(id="update-card" )
-                p(id='menuContainer') This is your menu:
-                    each drink in menu.drinks
-                        +drinkcard(drink)
+    div(class='content')
+      br
+      br
+      br
+      br
+      div(class='container')
+          div(class='card-list')
+            div(style='display: flex;')
+              h2(id='menuTitle') Menu
+            if menu
+              each drink in menu.drinks
+                br
+                +drinkcard(drink)
+                br

@@ -3,8 +3,12 @@ body {
     background-color: #333;
 }
 
-.card-container {
-    padding-top: 75px;
+#menuTitle{
+  font-family: Lobster, Monospace;
+  color: #5E5D5C;
+  color: red;
+  font-size: 32px;
+  margin: auto;
 }
 
 #update-card {

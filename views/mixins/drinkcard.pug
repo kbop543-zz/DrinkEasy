@@ -1,12 +1,9 @@
 mixin drinkcard(d)
     div(class='card')
         div(class='card-container')
-            p(class='card-title') #{d.name}
+            p(class='card-title') #{d.drinkName}
             div('card-content')
                 br
-                p(class='card-firstName') Drink Name: #{d.name} 
-                p(class='card-lastName') Decription: #{d.description}
+                p(class='card-description') Decription: #{d.description}
                 br
-                p(class='card-email') Price: #{d.price}
-                br
-                
+                p(class='card-price') Price: #{d.price}

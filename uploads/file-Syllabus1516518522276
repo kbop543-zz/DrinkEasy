@@ -1,0 +1,42 @@
+[
+  {
+    "company": "bar",
+    "email": "bar@bar.com",
+    "keepTab": true,
+    "drinks": [
+      {
+        "drinkName": "fugiat",
+        "price": 18,
+        "description":
+          "Cillum quis voluptate deserunt nisi ipsum ipsum labore culpa dolor nostrud enim elit cupidatat."
+      },
+      {
+        "drinkName": "Lorem",
+        "price": 7,
+        "description":
+          "Ea incididunt exercitation officia cupidatat in consectetur enim sunt excepteur minim officia et."
+      },
+      {
+        "drinkName": "proident",
+        "price": 4,
+        "description": "Aute Lorem consequat ex ad ullamco nostrud."
+      },
+      {
+        "drinkName": "dolore",
+        "price": 22,
+        "description": "Lorem laboris qui pariatur culpa."
+      },
+      {
+        "drinkName": "ea",
+        "price": 2,
+        "description": "Eiusmod Lorem ut sit nostrud ex ea ut Lorem dolor."
+      },
+      {
+        "drinkName": "deserunt",
+        "price": 9,
+        "description":
+          "Duis laboris officia minim reprehenderit sint excepteur velit nostrud aute cupidatat irure officia minim."
+      }
+    ]
+  }
+]

@@ -1,4 +1,4 @@
-'use strict'; 
+'use strict';
 
 var Menu = require('../models/menu');
 
@@ -25,13 +25,12 @@ var upload = multer({ storage : storage}).array('file',12);
 var menuObj= [];
 
 
-exports.uploadMenuForm = function(req, res){
+function uploadMenuForm(req, res){
   console.log("uploaded Menu")
   upload(req,res,function(err) {
     if(err) {
         return res.end("Error uploading file.");
     }
-    res.render('menu');
   })
 }
 
@@ -48,9 +47,10 @@ function read(res,req,file, cb) {
 
 
     for(let i in dataJson.drinks){
+      console.log(dataJson);
 
       menu.push({
-          "name": dataJson.drinks[i].drinkName,
+          "drinkName": dataJson.drinks[i].drinkName,
           "price": dataJson.drinks[i].price,
           "description": dataJson.drinks[i].description,
         });
@@ -59,14 +59,16 @@ function read(res,req,file, cb) {
 
 
     barData.push({
+      "company": dataJson.company,
       "email": dataJson.email,
       "drinks": menu,
       "keepTab": dataJson.keepTab
 
     });
-    
+
     var temp = {"menu" : barData}
     var uploadedMenu = new Menu(temp.menu[0]);
+    console.log(uploadedMenu);
 
 
     //find the menu
@@ -79,12 +81,12 @@ function read(res,req,file, cb) {
 
             if (foundMenu != undefined) {
 
-                // Remove the menu 
+                // Remove the menu
                 Menu.remove({
                     'email': dataJson.email
                 }, function(err) {
 
-                    
+
 
                     uploadedMenu.save(function(err){
                       if(err){
@@ -94,7 +96,7 @@ function read(res,req,file, cb) {
                       }
                         else{
                             var success = 'Data updated';
-                            res.render('menu', {error: success});
+                            res.render('menu', {menu: uploadedMenu});
                         }
                     });
                 });
@@ -109,24 +111,29 @@ function read(res,req,file, cb) {
                       }
                         else{
                             var success = 'Data updated';
-                            res.render('menu', {error: success});
+                            res.render('menu', {menu: uploadedMenu});
                         }
                     });
             }
         });
-    res.send(uploadedMenu);
 
-    
+
   fs.unlinkSync(filePath);
 })
 }
 
-//parse pdf and upload the parsed file to console 
+//parse pdf and upload the parsed file to console
 exports.parseMenu = function(req, res) {
     console.log('parsePdf');
     var finalObj;
     var count = 0;
     var duplicate_flag = 0;
+    upload(req,res,function(err) {
+      if(err) {
+          return res.end("Error uploading file.");
+      }
+      console.log('uploadPdf');
+    });
     fs.readdir('./uploads', function(err, filenames) {
 
       console.log(filenames);
@@ -145,5 +152,5 @@ exports.parseMenu = function(req, res) {
     })
 
   });
-  
+
 }

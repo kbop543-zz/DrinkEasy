@@ -1,17 +1,17 @@
 var mongoose = require('mongoose');
 
 var drinkSchema = mongoose.Schema({
-    name:{
+    drinkName:{
         type: String,
         unique: true,
         required: true
     },
-    
+
     price:{
         type: Number,
         required: true
     },
-    
+
     description:{
         type: String
     }
@@ -24,11 +24,16 @@ var menuSchema = mongoose.Schema({
     required: true,
     unique: true
   },
-  
+
   drinks: [drinkSchema],
-  
+
   keepTab: {
     type: Boolean,
+    required: true
+  },
+
+  company: {
+    type: String,
     required: true
   }
 

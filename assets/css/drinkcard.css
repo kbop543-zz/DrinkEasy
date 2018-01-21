@@ -1,0 +1,68 @@
+.card {
+    width: 565px;
+    min-height: 50px;
+    background: white;
+    padding: 25px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    font-size: 22px;
+    max-width: 500px;
+    margin: auto;
+
+}
+
+.card:hover {
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,0.5);
+}
+
+.card-title {
+    font-size: 32px;
+    font-weight: bold;
+    width: 65%;
+    padding-bottom: 20px;
+}
+
+.card-capacity {
+    text-align: right;
+    width: 35%;
+    padding-left: 5px;
+    padding-top: 10px;
+}
+
+.card-leaving, .card-arriving {
+    color: grey;
+    font-style: italic;
+}
+
+.card-price {
+    width: 100%;
+}
+
+.card-driver {
+    padding: 20px 10px 10px 3px;
+}
+
+.card-footer {
+    display: flex;
+    width: 100%;
+}
+
+
+#circle {
+    width: 12px;
+    height: 12px;
+    margin-right: 3px;
+    background: white;
+    border: 3px solid black;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+
+#rectangle {
+    width: 0px;
+    height: 30px;
+    margin-left: 7px;
+    padding: 10px;
+    border: 1px solid black;
+}

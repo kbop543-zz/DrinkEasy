@@ -1,4 +1,4 @@
-function parseMenu() {
+/*function parseMenu() {
 
 	$.ajax({
         type: "POST",
@@ -21,8 +21,8 @@ function parseMenu() {
 	    }
     })
 }
-
-/* Set up the page */
+*/
+/* Set up the page
 $(document).ready(function() {
     parseMenu();
-});
+});**/

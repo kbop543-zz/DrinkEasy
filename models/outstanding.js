@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var drinksSchema = mongoose.Schema({
-    name:{
+    drinkName:{
         type: String,
         unique: true,
         required: true

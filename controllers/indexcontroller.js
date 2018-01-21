@@ -14,6 +14,7 @@ var requirelogin = function requirelogin(req, res, next){
     }
 };
 
+
 module.exports = function(app){
 
 //middleware function for sessions
@@ -131,7 +132,6 @@ app.get('/account', function(req, res){
       if (!menu){
          res.render('account', {alreadySetUp: false});
       }
-
       else{
         res.render('account', {alreadySetUp: true});
       }
@@ -193,7 +193,7 @@ app.post('/', requirelogin, function(req, res){
     };
 });
 var file = require('./fileController.js');
-app.post('/uploadMenuForm',file.uploadMenuForm);
+//app.post('/uploadMenuForm',file.uploadMenuForm);
 
 app.post('/parseMenu',file.parseMenu,function(req, res){
   Menu.findOne({email: req.session.user.email}, function(err, menu){
