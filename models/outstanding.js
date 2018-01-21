@@ -1,9 +1,5 @@
 var mongoose = require('mongoose');
 
-//connect to database
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://drinkeasy:drinkeasy@ds263847.mlab.com:63847/drinkeasy');
-
 var drinksSchema = mongoose.Schema({
     name:{
         type: String,
@@ -24,10 +20,6 @@ var drinksSchema = mongoose.Schema({
 
 //create User model
 var billSchema = mongoose.Schema({
-  id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Bill'
-  },
   barID: {
     type: String,
     required: true,
@@ -42,4 +34,4 @@ var billSchema = mongoose.Schema({
   drinks: [drinksSchema]
 });
 
-module.exports = mongoose.model('Bill', userSchema);
+module.exports = mongoose.model('Bill', billSchema);
