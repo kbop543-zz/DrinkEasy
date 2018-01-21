@@ -1,0 +1,27 @@
+include mixins/hikecard
+include mixins/nav
+
+head
+    title=title
+
+    link(rel='stylesheet', href='/assets/css/global.css')
+    link(rel='stylesheet' href='/assets/css/reset.css')
+    link(rel='stylesheet' href='/assets/css/menu.css')
+    link(rel='stylesheet' href='/assets/css/nav.css')
+    link(rel='stylesheet' href='/assets/css/index.css')
+    link(rel='stylesheet' href='/assets/css/hikecard.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js')
+    script(src='/assets/scripts/dashboard.js' type='text/javascript')
+body
+    +navbar()
+
+
+div(class="content")
+        div(class="card-container")
+            br
+            br
+            br
+            br
+            div(id="update-card" )
+                img(src='/assets/images/sanni.jpg', alt='', style="width:100px;height:100px;")
+                h1 John Grant

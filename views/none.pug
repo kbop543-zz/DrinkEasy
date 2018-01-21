@@ -1,0 +1,26 @@
+include mixins/hikecard
+include mixins/nav
+
+head
+    title=title
+
+    link(rel='stylesheet', href='/assets/css/index.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js')
+    script(src='/assets/scripts/bills.js', type='text/javascript')
+
+body
+    div(class='center' id='logo' style='display: flex;')
+        p Drink
+        p(style='font-style: italic; font-weight: bold;') Easy
+    content
+        if typeof error !== 'undefined' && error.length > 0
+            error(class='error')=error
+
+        div(class='main-page')
+            br
+            br
+            br
+            br
+            br
+            br
+            h1 YOU HAVE NO OUTSTANDING BILLS
