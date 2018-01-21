@@ -1,4 +1,4 @@
-var Bill = require('../models/outstanding');
+/*var Bill = require('../models/outstanding');
 var bcrypt = require('bcrypt');
 var Menu = require('../models/menu');
 
@@ -12,4 +12,4 @@ module.exports = function(app){
           res.render('outstanding', { title: 'DrinkEasy' });
       });
 
-  };
+  };*/

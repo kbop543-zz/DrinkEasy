@@ -3,28 +3,36 @@ mixin navbar()
 
         li(class="nav-link")
             div(istyle='display: flex;')
-                a(href='/dashboard') Drink
-                a(href='/dashboard' style='font-style: italic; font-weight: bold;') Easy
+                a(href='/menu') Drink
+                a(href='/menu' style='font-style: italic; font-weight: bold;') Easy
+
+ 
+        li(class="nav-link")
+            div(istyle='display: flex;')
+                a(href='/uploadMenu') Upload
+                a(href='/uploadMenu' style='font-style: italic; font-weight: bold;') Menu
+
 
         li(class="nav-link")
                 div(style='display: flex;')
                     a(href='/account') My
                     a(href='/account' style='font-style: italic; font-weight: bold; padding-left: 5px;') Account
 
-        li(class="nav-link")
-            div(style='display: flex;')
-                a(href='/outstanding' action='/outstanding' method='get') Outstanding
-                a(href='/outstanding' style='font-style: italic; font-weight: bold; padding-left: 5px;') Tabs
-
-        if (setUpAccount == 1)
+        if alreadySetUp 
             li(class="nav-link")
                 div(style='display: flex;')
-                    a(href='/hikes') Settled
-                    a(href='/hikes' style='font-style: italic; font-weight: bold; padding-left: 5px;') Tabs
+                    a(href='/outstanding' action='/outstanding' method='get') Outstanding
+                    a(href='/outstanding' style='font-style: italic; font-weight: bold; padding-left: 5px;') Tabs
+
+        if alreadySetUp 
+            li(class="nav-link")
+                div(style='display: flex;')
+                    a(href='/settled') Settled
+                    a(href='/settled' style='font-style: italic; font-weight: bold; padding-left: 5px;') Tabs
 
         li(class="nav-link")
             div(style='display: flex;')
-                a(href='/messages') Support
+                a(href='/support') Support
 
         li(class="nav-link")
             div(style='display: flex;')

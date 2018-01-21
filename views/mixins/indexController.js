@@ -74,26 +74,10 @@ app.post('/login', function(req, res){
       else{
         if(bcrypt.compareSync(req.body.password, user.password)){
           req.session.user = user;
-          Menu.findOne({email: req.session.user.email}, function(err, menu){
-            if (!menu){
-              res.render('uploadMenu',
-              {email: user.email,
-                 barname: user.nameOfBar,
-                  password: req.body.password,
-                   address:user.address,
-                 alreadySetUp: false});
-               }else{
-                 res.render('menu',
-                 {email: user.email,
-                    barname: user.nameOfBar,
-                     password: req.body.password,
-                      address:user.address,
-                    alreadySetUp: true,
-                  menu: menu});
-               }
-             })
-              console.log("user successfully logged in" + user.email);
-        }else{
+          res.render('uploadMenu', {email: user.email, barname: user.nameOfBar, password: req.body.password, address:user.address});
+          console.log("user successfully logged in" + user.email);
+        }
+        else{
           res.render('index', {error: 'Invalid username or password'});
         }
       }
@@ -102,48 +86,8 @@ app.post('/login', function(req, res){
 
 
 app.get('/login', requirelogin, function(req, res){
-  Menu.findOne({email: req.session.user.email}, function(err, menu){
-    console.log(req.session.user.email);
-    console.log(menu);
-    if (!menu){
-      res.render('uploadMenu',
-      {email: req.user.email,
-         barname: req.user.nameOfBar,
-          password: req.user.password,
-           address:req.user.address,
-         alreadySetUp: false});
-       }else{
-         res.render('menu',
-         {email: req.user.email,
-            barname: req.user.nameOfBar,
-             password: req.user.password,
-              address:req.user.address,
-            alreadySetUp: true});
-       }
-     });
-})
-
-app.get('/outstanding', function(req,res){
-  Menu.findOne({email: req.session.user.email}, function(err, menu){
-    console.log(req.session.user.email);
-    console.log(menu);
-    if (!menu){
-      res.render('billPreviews',
-      {email: req.user.email,
-         barname: req.user.nameOfBar,
-          password: req.user.password,
-           address:req.user.address,
-         alreadySetUp: false});
-       }else{
-         res.render('billPreviews',
-         {email: req.user.email,
-            barname: req.user.nameOfBar,
-             password: req.user.password,
-              address:req.user.address,
-            alreadySetUp: true});
-       }
-     });
-})
+    res.render('menu', {email: req.user.email, barname: req.user.nameOfBar, password: req.user.password, address:req.user.address});
+});
 
 
 app.get('/account', function(req, res){
@@ -156,7 +100,7 @@ app.get('/account', function(req, res){
         res.render('account', {alreadySetUp: true});
       }
     })
-
+  
 });
 
 app.get('/menu', function(req, res){
@@ -169,7 +113,7 @@ app.get('/menu', function(req, res){
         res.render('menu', {alreadySetUp: true, menu: menu});
       }
     })
-
+  
 });
 
 
@@ -183,9 +127,9 @@ app.get('/uploadMenu', function(req, res){
         res.render('uploadMenu', {alreadySetUp: true});
       }
     })
-
+  
 });
-
+    
 app.delete('/', requirelogin, (req, res, next) => {
   User.findOneAndRemove({email: req.user.email}, (err) => {
     if (err) {
@@ -217,14 +161,14 @@ app.post('/uploadMenuForm',file.uploadMenuForm);
 app.post('/parseMenu',file.parseMenu,function(req, res){
   Menu.findOne({email: req.session.user.email}, function(err, menu){
       if (!menu){
-         res.render('uploadMenu', {alreadySetUp: false, menu:menu});
+         res.render('uploadMenu', {alreadySetUp: false, menu=menu});
       }
 
       else{
-        res.render('uploadMenu', {alreadySetUp: true, menu:menu});
+        res.render('uploadMenu', {alreadySetUp: true, menu=menu});
       }
     })
-
+  
 });
 
 
