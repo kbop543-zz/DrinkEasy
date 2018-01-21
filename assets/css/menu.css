@@ -5,9 +5,14 @@ body {
 
 #menuTitle{
   font-family: Lobster, Monospace;
-  color: #5E5D5C;
   color: red;
   font-size: 32px;
+  margin: auto;
+}
+
+.tabsFlag {
+  color: white;
+  font-size: 12px;
   margin: auto;
 }
 

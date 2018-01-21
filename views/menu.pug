@@ -25,6 +25,12 @@ body
           div(class='card-list')
             div(style='display: flex;')
               h2(id='menuTitle') Menu
+            div(style='display: flex;')
+              if menu.keepTab
+                p(class="tabsFlag") This menu allows customers to keep tabs
+              else
+                p(class="tabsFlag") This menu doesn't allow customers to keep tabs
+
             if menu
               each drink in menu.drinks
                 br

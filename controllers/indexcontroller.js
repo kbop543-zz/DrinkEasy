@@ -127,7 +127,6 @@ app.get('/login', requirelogin, function(req, res){
 
 
 app.get('/account', function(req, res){
-    res.render('account');
     Menu.findOne({email: req.session.user.email}, function(err, menu){
       if (!menu){
          res.render('account', {alreadySetUp: false});
@@ -207,6 +206,71 @@ app.post('/parseMenu',file.parseMenu,function(req, res){
     })
 
 });
+
+app.post('/editUser',function(req,res){
+  console.log('editUser');
+  console.log(req.body);
+  // Find the user
+        User.findOne({
+            email: req.session.user.email
+        }, function(err, foundUser) {
+            if (err) throw err;
+            console.log(foundUser);
+
+            if (foundUser != undefined) {
+
+                // Remove the user
+                User.remove({
+                    email: req.session.user.email
+                }, function(err) {
+
+                    var userData = req.body;
+                    console.log(req.body);
+                    userData['email'] = req.session.user.email;
+
+                    if (req.body.password == null ||
+                    req.body.password == '' ) {
+                        userData['password'] = foundUser.password;
+                    }
+
+                    // Create a new user with the updated information
+                    var newUser = new User(userData);
+
+                    newUser.save(function(err) {
+                        if (err) throw err;
+
+                        res.send('Success');
+                    });
+                });
+
+            } else {
+                // Return error if user not found
+                res.status(500).send('The user you are trying to edit does not exist');
+            }
+        });
+});
+
+app.get('/getOneUser',function(req,res){
+  console.log('getOneUser');
+
+    // Get the username from current session
+    User.findOne({
+        email: req.session.user.email
+    }, function(err, foundUser) {
+        if (err) throw err;
+
+        // If user is found, send it back
+        if (foundUser != undefined) {
+        	console.log(foundUser);
+            res.send(foundUser);
+
+        } else {
+            // Return error if user not found
+            res.status(500).send('The user you are trying to edit does not exist');
+        }
+    });
+});
+
 
 
 app.get('/logout', function(req, res){
