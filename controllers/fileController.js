@@ -37,6 +37,7 @@ function uploadMenuForm(req, res){
 
 /*helper function to split text file line by line and read*/
 function read(res,req,file, cb) {
+  console.log("About to read file.");
   var filePath = './uploads/'+file;
 
   var barData = [];
