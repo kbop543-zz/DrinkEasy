@@ -142,7 +142,7 @@ app.get('/account', function(req, res){
 app.get('/menu', function(req, res){
   Menu.findOne({email: req.session.user.email}, function(err, menu){
       if (!menu){
-         res.render('menu', {alreadySetUp: false, menu: menu});
+         res.render('uploadMenu', {alreadySetUp: false, menu: menu});
       }
 
       else{
