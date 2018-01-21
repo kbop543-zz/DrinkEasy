@@ -22,15 +22,11 @@ var storage =   multer.diskStorage({
 /*upload handles input called 'file'*/
 var upload = multer({ storage : storage}).array('file',12);
 
-var menuObj;
+var menuObj= [];
 
-/*fs.readFile('menu.json', 'utf-8', function(err, data) {
-    if(err) throw err;
-    menuObj = JSON.parse(data);
-    console.log(menuObj); 
-});*/
 
 exports.uploadMenuForm = function(req, res){
+  console.log("uploaded Menu")
   upload(req,res,function(err) {
     if(err) {
         return res.end("Error uploading file.");
@@ -41,38 +37,38 @@ exports.uploadMenuForm = function(req, res){
 
 
 /*helper function to split text file line by line and read*/
-function read(req,file, cb) {
+function read(res,req,file, cb) {
   var filePath = './uploads/'+file;
 
   var barData = [];
   var menu =[];
 
   fs.readFile(filePath, 'utf8', function(err, data) {
+    var dataJson = JSON.parse(data)[0];
 
-    for(drink in data.drinks){
+
+    for(let i in dataJson.drinks){
 
       menu.push({
-          "name": drink.drinkName,
-          "price": drink.price,
-          "description": drink.description,
+          "name": dataJson.drinks[i].drinkName,
+          "price": dataJson.drinks[i].price,
+          "description": dataJson.drinks[i].description,
         });
     }
 
 
+
     barData.push({
-      "email": data.email,
-      "drinks": menu
+      "email": dataJson.email,
+      "drinks": menu,
+      "keepTab": dataJson.keepTab
 
     });
-
-  console.log("just read this from the file for user" + data.email);
-
+    
     var temp = {"menu" : barData}
-    menuObj.courses.push(temp.menu[0]);
 
-    var json = JSON.stringify(menuObj);
+    var uploadedMenu = new Menu(temp.menu[0]);
 
-    var uploadedMenu = new Menu({barData});
 
     uploadedMenu.save(function(err){
       if(err){
@@ -82,7 +78,7 @@ function read(req,file, cb) {
       }
         else{
             var success = 'Data updated';
-            res.render('account', {error: success});
+            res.render('menu', {error: success});
         }
     });
 
@@ -106,11 +102,14 @@ exports.parseMenu = function(req, res) {
       return;
     }
     filenames.forEach(function(filename) {
+      if(filename[0] == 'f'){
       count++;
        console.log("count is "+count);
-       read(req,filename)
+       read(res,req,filename)
+     }
 
     })
+
   });
   
 }

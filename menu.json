@@ -1,6 +1,7 @@
 [
   {
     "email": "bar@bar.com",
+    "keepTab": true,
     "drinks": [
       {
         "drinkName": "fugiat",

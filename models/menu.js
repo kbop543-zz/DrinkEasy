@@ -25,7 +25,13 @@ var menuSchema = mongoose.Schema({
     unique: true
   },
   
-  drinks: [drinkSchema]
+  drinks: [drinkSchema],
+  
+  keepTab: {
+    type: Boolean,
+    required: true
+  }
+
 });
 
 module.exports = mongoose.model('Menu', menuSchema);

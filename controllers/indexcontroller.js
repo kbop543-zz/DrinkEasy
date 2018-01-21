@@ -1,4 +1,5 @@
 var User = require('../models/user');
+var Menu = require('../models/menu');
 var bcrypt = require('bcrypt');
 
 //use for pages that require login
@@ -83,6 +84,7 @@ app.post('/login', function(req, res){
       });
 });
 
+
 app.get('/login', requirelogin, function(req, res){
     res.render('menu', {email: req.user.email, barname: req.user.nameOfBar, password: req.user.password, address:req.user.address});
 });
@@ -114,7 +116,20 @@ app.post('/', requirelogin, function(req, res){
 });
 var file = require('./fileController.js');
 app.post('/uploadMenuForm',file.uploadMenuForm);
-app.post('/parseMenu',file.parseMenu);
+
+app.post('/parseMenu',file.parseMenu, function(req, res){
+  Menu.findOne({email: req.session.email}, function(err, menu){
+      if (!menu){
+         res.render('uploadMenu', {error: 'Menu not found'});
+         console.log("menu is " + menu);
+      }
+
+      else{
+        res.render('menu', {menu: menu});
+      }
+    })
+  
+});
 
 
 app.get('/logout', function(req, res){
